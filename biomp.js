@@ -1,10 +1,16 @@
 window.bioMp = function(el, options) {
+	//set innerHTML when div exist
+	if(arguments.length === 1){
+		setInner(document.getElementById('inner'),el)
+		return
+	}
 	// Private
 	var front = {width: 428, height: 889, ratio: (428 / 889)},
 	    side = {width: 302, height: 889, ratio: (302 / 889)};
 	
 	// Options
 	var options = options || {},
+		innerHTML = setOption(options.innerHTML, ''),
 	    url = setOption(options.url, ''),
 	    view = setOption(options.view, 'front'),
 	    image = setOption(options.image, ''),
@@ -12,6 +18,9 @@ window.bioMp = function(el, options) {
 	    width = setOption(options.width, 0),
 	    height = setOption(options.height, 0);
 	
+	function setInner(div,inner){
+		div.innerHTML = inner;
+	}
 	function setOption(option, _default) {
 		return (typeof option === 'undefined') ? _default : option;
 	}
@@ -67,11 +76,21 @@ window.bioMp = function(el, options) {
 		phoneImage.src = image;
 		phone.appendChild(phoneImage);
 		
-		// Add iframe
-		var iframe = document.createElement('iframe');
-		iframe.src = url;
-		iframe.className = 'bio-mp-screen';
-		phone.appendChild(iframe);
+		if(url){
+			// Add iframe
+			var iframe = document.createElement('iframe');
+			iframe.src = url;
+			iframe.className = 'bio-mp-screen';
+			phone.appendChild(iframe);
+		}
+		if(innerHTML){
+			//Add div
+			var div = document.createElement('div');
+			div.innerHTML = innerHTML;
+			div.className = 'bio-mp-screen';
+			div.id = 'inner'
+			phone.appendChild(div);
+		}
 
 		// Add CSS
 		var wrapCss = 'width: ' + width + 'px; height: ' + height + 'px; overflow: hidden; transform-origin: 0 0 0;';
@@ -88,7 +107,12 @@ window.bioMp = function(el, options) {
 		el.style.cssText += wrapCss;
 		phone.style.cssText = phoneCss;
 		phoneImage.style.cssText = phoneImageCss;
-		iframe.style.cssText = screenCss;
+		if(iframe){
+			iframe.style.cssText = screenCss;
+		}
+		if(div){
+			div.style.cssText = screenCss;
+		}
 		
 		// Add scrollbar CSS above the wrap
 		el.parentNode.insertBefore(style, el);

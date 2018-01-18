@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="preview"></div>
+		<input id="input"/>
+		<script src="biomp.js"></script>
+		<script>
+			var input = document.getElementById('input')
+			input.addEventListener('change',function(){
+				bioMp(input.value)
+			},false)
+			
+			bioMp(document.getElementById('preview'), {
+				innerHTML: '1a',
+				view: 'front',
+				image: './images/iphone6_front_white.png',
+				width:'320',
+				height:'480'
+			});
+		</script>
+	</body>
+</html>
