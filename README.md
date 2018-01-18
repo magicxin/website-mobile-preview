@@ -39,6 +39,11 @@ bioMp(document.getElementById('preview'));
 ```javascript
 bioMp($('#preview'));
 ```
+*reset*
+
+```javascript
+bioMp('<div>set what you need</div>');
+```
 
 You must include options such as an image and viewing perspective for the preview to show correctly.  This is shown in the next section.
 
@@ -48,6 +53,7 @@ All options must be added to the init function as an object.
 
 Name | Type | Default | Description
 -----|------|---------|------------
+**innerHTML** | string | blank | innerHTML of the div to preview.
 **url** | string | blank | URL of the web page to preview.
 **view** | string | front | The perspective of the phone.  Possible values are **front**, **left**, and **right**.
 **image** | string | blank | URL of the image to use for the phone. A total of 9 images are included with this script.
@@ -60,6 +66,14 @@ For example, to create a left facing preview for http://beeker.io on the gold iP
 ```javascript
 bioMp(document.getElementById('preview'), {
     url: 'http://beeker.io',
+    view: 'left',
+    image: 'images/iphone6_side_left_gold.png'
+});
+
+or
+
+bioMp(document.getElementById('preview'), {
+    innerHTML: '<div>something</div>',
     view: 'left',
     image: 'images/iphone6_side_left_gold.png'
 });
